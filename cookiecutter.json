@@ -1,0 +1,14 @@
+{
+    "project_name": "PHP Project",
+    "project_slug": "{{ cookiecutter.project_name|trim|lower|replace(' ', '_') }}",
+    "project_title": "{{ cookiecutter.project_name|trim|title|replace(' ', '') }}",
+    "docker_project_name": "{{ cookiecutter.project_title }}",
+    "docker_dir": "docker",
+    "caddy_version": "0.11.5",
+    "caddy_alpine_version": "3.8",
+    "mysql_database_name": "{{ cookiecutter.project_slug|truncate(64) }}",
+    "mysql_user": "{{ cookiecutter.project_slug }}",
+    "mysql_version": "8.0",
+    "php_version": "7.2",
+    "php_image": ["alpine", "default"]
+}

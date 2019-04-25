@@ -1,0 +1,4 @@
+xdebug.remote_host      = 'docker.for.mac.host.internal'
+xdebug.remote_enable    = on
+xdebug.remote_autostart = on
+xdebug.remote_log       = '/srv/php-fpm/xdebug.log'

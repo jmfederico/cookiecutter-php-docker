@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  caddy:
+    build: ./docker/caddy
+    env_file:
+      - ./docker/caddy/.env
+    volumes:
+      - ${DATA_DIR:?DATA_DIR}/.caddy:/root/.caddy
+      - ${DATA_DIR:?DATA_DIR}/certs:/srv/certs
+      - ./:/srv/www
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+
+  php-fpm:
+    build:
+      context: ./
+      dockerfile: docker/php-fpm/Dockerfile
+    env_file:
+      - ./docker/php-fpm/.env
+    volumes:
+      - ${DATA_DIR:?DATA_DIR}/php-fpm:/srv/php-fpm
+      - ./:/srv/www
+      # Override `vendor` to isolate it from local mount.
+      # Allows platform specific builds and binaries.
+      - /srv/www/vendor/
+
+  mysql:
+    image: mysql:{{ cookiecutter.mysql_version }}
+    env_file:
+      - ./docker/mysql/.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306/tcp"
+
+  maildev:
+    image: djfarrelly/maildev
+    ports:
+      - "1080:1080/tcp"
+      - "1025:1025/tcp"
+    command: ["bin/maildev", "--web", "1080", "--smtp", "1025"]
+
+volumes:
+  mysql_data:
