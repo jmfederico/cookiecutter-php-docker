@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 set -eo pipefail
 
-composer dump-autoloader
+composer dump-autoload
 
 exec "$@"
