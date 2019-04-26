@@ -43,3 +43,8 @@ WORKDIR /srv/www
 COPY composer.* ./
 
 RUN composer install
+
+EXPOSE 9000/tcp
+
+COPY docker/php-fpm/docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
