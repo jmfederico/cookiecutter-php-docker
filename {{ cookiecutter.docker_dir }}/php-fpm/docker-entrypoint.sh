@@ -3,4 +3,4 @@ set -eo pipefail
 
 composer dump-autoload
 
-exec "$@"
+exec docker-php-entrypoint "$@"
