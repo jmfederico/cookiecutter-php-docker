@@ -7,7 +7,9 @@ services:
     volumes:
       - ${DATA_DIR:?DATA_DIR}/.caddy:/root/.caddy
       - ${DATA_DIR:?DATA_DIR}/certs:/srv/certs
-      - ./:/srv/www
+      # Override `vendor` to isolate it from local mount.
+      # Allows platform specific builds and binaries.
+      - composer_vendor:/srv/www/vendor/
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
@@ -23,7 +25,8 @@ services:
       - ./:/srv/www
       # Override `vendor` to isolate it from local mount.
       # Allows platform specific builds and binaries.
-      - /srv/www/vendor/
+      - composer_vendor:/srv/www/vendor/
+      - composer_cache:/root/.composer/cache
 
   mysql:
     image: mysql:{{ cookiecutter.mysql_version }}
@@ -43,3 +46,5 @@ services:
 
 volumes:
   mysql_data:
+  composer_vendor:
+  composer_cache:

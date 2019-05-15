@@ -40,10 +40,6 @@ COPY docker/php-fpm/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 WORKDIR /srv/www
 
-COPY composer.* ./
-
-RUN composer install
-
 EXPOSE 9000/tcp
 
 COPY docker/php-fpm/docker-entrypoint.sh /usr/local/bin/

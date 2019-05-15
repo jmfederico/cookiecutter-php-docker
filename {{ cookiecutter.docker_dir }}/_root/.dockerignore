@@ -3,5 +3,3 @@
 !docker/**/docker-entrypoint.sh
 !docker/php-fpm/conf.d/*.ini
 !docker/php-fpm/php-fpm.d/*.conf
-
-!composer.*
