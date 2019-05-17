@@ -19,6 +19,7 @@ services:
       context: ./
       dockerfile: docker/php-fpm/Dockerfile
     env_file:
+      - .env
       - ./docker/php-fpm/.env
     volumes:
       - ${DATA_DIR:?DATA_DIR}/php-fpm:/srv/php-fpm

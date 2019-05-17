@@ -1,19 +1,36 @@
-import os
 import urllib.request
+from pathlib import Path
 
 # Set choosen base PHP image
-baseImage = '{{ cookiecutter.php_image }}'
+baseImage = "{{ cookiecutter.php_image }}"
 
-if baseImage == 'alpine':
-    os.remove('php-fpm/default.Dockerfile')
-    os.rename('php-fpm/alpine.Dockerfile', 'php-fpm/Dockerfile')
+if baseImage == "alpine":
+    Path("php-fpm/default.Dockerfile").unlink()
+    Path("php-fpm/alpine.Dockerfile").rename(Path("php-fpm/Dockerfile"))
 
-if baseImage == 'default':
-    os.remove('php-fpm/alpine.Dockerfile')
-    os.rename('php-fpm/default.Dockerfile', 'php-fpm/Dockerfile')
+if baseImage == "default":
+    Path("php-fpm/alpine.Dockerfile").unlink()
+    Path("php-fpm/default.Dockerfile").rename(Path("php-fpm/Dockerfile"))
 
-urllib.request.urlretrieve("https://www.gitignore.io/api/composer", "../.gitignore")
+urllib.request.urlretrieve(
+    "https://www.gitignore.io/api/composer", Path("../.gitignore")
+)
 
-for file_name in os.listdir("_root"):
-    os.rename(f"_root/{file_name}", f"../{file_name}")
-os.rmdir("_root")
+# Move root files.
+_root = Path("_root")
+project_root = Path("..")
+for child in _root.iterdir():
+    child.rename(project_root / child.name)
+_root.rmdir()
+
+# Create example index.php file for tests.
+Path("../public").mkdir(exist_ok=True)
+index = Path("../public/index.php")
+if not index.exists():
+    index.write_text(
+        """
+<?php
+
+phpinfo();
+"""
+    )
