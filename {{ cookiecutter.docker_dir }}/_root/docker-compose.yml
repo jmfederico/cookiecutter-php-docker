@@ -7,6 +7,7 @@ services:
     volumes:
       - ${DATA_DIR:?DATA_DIR}/.caddy:/root/.caddy
       - ${DATA_DIR:?DATA_DIR}/certs:/srv/certs
+      - ./:/srv/www
       # Override `vendor` to isolate it from local mount.
       # Allows platform specific builds and binaries.
       - composer_vendor:/srv/www/vendor/
@@ -37,6 +38,21 @@ services:
       - mysql_data:/var/lib/mysql
     ports:
       - "3306:3306/tcp"
+
+  webpack:
+    build:
+      context: ./
+      dockerfile: docker/webpack/Dockerfile
+    env_file:
+      - ./docker/webpack/.env
+    volumes:
+      - ./:/srv/app
+      # Override `node_modules` to isolate it from local mount.
+      - /srv/app/node_modules/
+      - ${DATA_DIR:?DATA_DIR}/.caddy:/root/.caddy
+      - ${DATA_DIR:?DATA_DIR}/certs:/srv/certs
+    ports:
+      - "55555:55555/tcp"
 
   maildev:
     image: djfarrelly/maildev

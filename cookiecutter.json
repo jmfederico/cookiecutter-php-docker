@@ -6,9 +6,10 @@
     "docker_dir": "docker",
     "caddy_version": "0.11.5",
     "caddy_alpine_version": "3.8",
-    "mysql_database_name": "{{ cookiecutter.project_slug|truncate(64) }}",
-    "mysql_user": "{{ cookiecutter.project_slug }}",
-    "mysql_version": "8.0",
     "php_version": "7.2",
-    "php_image": ["alpine", "default"]
+    "php_image": ["alpine", "default"],
+    "node_version": "10",
+    "mysql_version": "8.0",
+    "mysql_database_name": "{{ cookiecutter.project_slug|truncate(64) }}",
+    "mysql_user": "{{ cookiecutter.project_slug }}"
 }
