@@ -6,11 +6,12 @@ running PHP projects in Docker.
 ## Features
 
 * Uses [MySQL](https://www.mysql.com) as database.
-* Uses [Caddy](https://caddyserver.com) as web-server (with
+* Uses [Caddy](https://caddyserver.com) as web-server (optionally with
 [Cloudflare](https://caddyserver.com/docs/tls.dns.cloudflare) plugin).
 * Serves on HTTPS.
 * Serves files from `public` folder by default.
-* Uses [Alpine](https://alpinelinux.org) for base docker images.
+* Uses [Alpine](https://alpinelinux.org) or [Debian](https://www.debian.org) for PHP
+docker images.
 * [Composer](https://getcomposer.org) as package management.
 * Includes a development [mail server](http://djfarrelly.github.io/MailDev/).
 * Includes example dotenv files compatible with [dotenver](https://pypi.org/project/dotenver/).
