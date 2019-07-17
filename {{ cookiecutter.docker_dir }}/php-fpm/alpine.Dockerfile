@@ -11,7 +11,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && apk add --no-cache bzip2-dev \
     && docker-php-ext-install bz2 \
     \
-    && apk add --no-cache zlib-dev \
+    && apk add --no-cache libzip-dev \
     && docker-php-ext-install zip \
     \
     && apk add --no-cache icu-dev \
