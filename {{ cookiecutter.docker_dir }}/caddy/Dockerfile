@@ -5,7 +5,8 @@ RUN mkdir -p /srv/www \
 
 WORKDIR /srv/caddy
 
-ADD https://github.com/FiloSottile/mkcert/releases/download/v1.4.0/mkcert-v1.4.0-linux-amd64 /usr/local/bin/mkcert
+ARG MKCERT_VERSION={{ cookiecutter.mkcert_version }}
+RUN wget -O /usr/local/bin/mkcert https://github.com/FiloSottile/mkcert/releases/download/v${MKCERT_VERSION}/mkcert-v${MKCERT_VERSION}-linux-amd64
 RUN chmod +x /usr/local/bin/mkcert
 
 COPY docker-entrypoint.sh /usr/local/bin/

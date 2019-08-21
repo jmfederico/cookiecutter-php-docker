@@ -5,6 +5,7 @@
     "docker_project_name": "{{ cookiecutter.project_title }}",
     "docker_dir": "docker",
     "caddy_version": "1.0.3",
+    "mkcert_version": "1.4.0",
     "php_version": "7.3",
     "php_image": ["alpine", "default"],
     "node_version": "12",
