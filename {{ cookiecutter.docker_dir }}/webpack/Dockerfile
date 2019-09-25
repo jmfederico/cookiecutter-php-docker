@@ -1,6 +1,6 @@
 FROM node:{{ cookiecutter.node_version }}-alpine
 
-WORKDIR /srv/app
+WORKDIR /srv/www
 
 COPY package*.json ./
 RUN npm install

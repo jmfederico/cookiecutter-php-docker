@@ -46,7 +46,7 @@ services:
     env_file:
       - ./docker/webpack/.env
     volumes:
-      - ./:/srv/app
+      - ./:/srv/www
       # Override `node_modules` to isolate it from local mount.
       - /srv/app/node_modules/
       - ${DATA_DIR:?DATA_DIR}/.caddy:/root/.caddy
