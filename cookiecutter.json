@@ -2,7 +2,6 @@
     "project_name": "PHP Project",
     "project_slug": "{{ cookiecutter.project_name|trim|lower|replace(' ', '_')|replace('-', '_') }}",
     "project_title": "{{ cookiecutter.project_slug|replace('_', ' ')|title|replace(' ', '') }}",
-    "docker_project_name": "{{ cookiecutter.project_title }}",
     "docker_dir": "docker",
     "caddy_version": "1.0.3",
     "mkcert_version": "1.4.0",

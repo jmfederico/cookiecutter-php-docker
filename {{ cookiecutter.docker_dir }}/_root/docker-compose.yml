@@ -5,9 +5,9 @@ services:
     env_file:
       - ./docker/caddy/.env
     volumes:
-      - ${DATA_DIR:?DATA_DIR}/.caddy:/root/.caddy
-      - ${DATA_DIR:?DATA_DIR}/certs:/srv/certs
-      - ./:/srv/www
+      - ./docker/.dev/.caddy:/root/.caddy:delegated
+      - ./docker/.dev/certs:/srv/certs:cached
+      - ./:/srv/www:cached
       # Override `vendor` to isolate it from local mount.
       # Allows platform specific builds and binaries.
       - composer_vendor:/srv/www/vendor/
@@ -23,8 +23,8 @@ services:
       - .env
       - ./docker/php-fpm/.env
     volumes:
-      - ${DATA_DIR:?DATA_DIR}/php-fpm:/srv/php-fpm
-      - ./:/srv/www
+      - ./docker/.dev/php-fpm:/srv/php-fpm:delegated
+      - ./:/srv/www:cached
       # Override `vendor` to isolate it from local mount.
       # Allows platform specific builds and binaries.
       - composer_vendor:/srv/www/vendor/
@@ -46,11 +46,11 @@ services:
     env_file:
       - ./docker/webpack/.env
     volumes:
-      - ./:/srv/www
+      - ./:/srv/www:cached
       # Override `node_modules` to isolate it from local mount.
       - /srv/app/node_modules/
-      - ${DATA_DIR:?DATA_DIR}/.caddy:/root/.caddy
-      - ${DATA_DIR:?DATA_DIR}/certs:/srv/certs
+      - ./docker/.dev/.caddy:/root/.caddy:delegated
+      - ./docker/.dev/certs:/srv/certs:cached
     ports:
       - "55555:55555/tcp"
 
