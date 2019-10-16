@@ -5,6 +5,7 @@ services:
     env_file:
       - ./docker/caddy/.env
     volumes:
+      - ./docker/caddy/conf:/srv/caddy:cached
       - ./docker/.dev/.caddy:/root/.caddy:delegated
       - ./docker/.dev/certs:/srv/certs:cached
       - ./:/srv/www:cached
